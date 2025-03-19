@@ -1,0 +1,52 @@
+{
+  "noticias": [
+    {
+      "id": "ebe0",
+      "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "content": "<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>",
+      "category": "Programação",
+      "highlightText": "aaaaaaaaaaa",
+      "isFeatured": true,
+      "createdAt": "2025-03-01T06:21:53.429Z"
+    },
+    {
+      "id": "f5b9",
+      "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "content": "<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>",
+      "category": "Programação",
+      "highlightText": "aaaaaaaaaaaa",
+      "isFeatured": true,
+      "createdAt": "2025-03-01T06:22:07.980Z"
+    },
+    {
+      "id": "84d8",
+      "title": "Common components (e.g. <div>)",
+      "subtitle": "All built-in browser components events.",
+      "content": "<p>A uns 3/4 meses descobri um<span style=\"font-size: 12px;\"> câncer, desde e</span>ntão venho ouvindo esse hino pq ele sempre me deu forças (mesmo antes de desc<strong>obrir), toda vez que me pego triste, com medo e <span style=\"color: rgb(106, 168, 79);\">chorando </span>e<span style=\"font-size: 30px;\">u coloco esse som, tenho muita fé em Deu<span style=\"background-color: rgb(17, 85, 204);\">s e creio que esse tempo ruim vai passar pq é só uma fase\n\nEdit:. Galera, me c</span>urei e estou 100%. Obrigado pelas mensagens positivas! 22/2/24 Deus é bom.</span><br><br><img src=\"https://yt3.ggpht.com/FQ3IdZaxCM_JYNXq_2cvbn5OZJJ2hbxDmP9ukgQRJ_7Ge0ETt-mzM8G3lXZmhjlhiarEJ2ZIYC0=s88-c-k-c0x00ffffff-no-rj\" alt=\"\" width=\"300\"><br></strong></p>",
+      "category": "Programação",
+      "source": "Youtube",
+      "highlightText": "Components",
+      "isFeatured": true,
+      "createdAt": "2025-03-01T06:32:56.532Z"
+    },
+    {
+      "id": "3ce4",
+      "title": "blablablablablabla",
+      "content": "<p>blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>",
+      "category": "Programação",
+      "source": "MC Buret",
+      "highlightText": "blablablablablabla",
+      "isFeatured": true,
+      "createdAt": "2025-03-18T00:38:35.451Z"
+    },
+    {
+      "id": "9a32",
+      "title": "blablablablalbalba",
+      "content": "<p>blablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalbablablablablalbalba</p>",
+      "category": "Programação",
+      "highlightText": "blablablablalbalba",
+      "isFeatured": false,
+      "createdAt": "2025-03-18T00:39:20.610Z"
+    }
+  ]
+}
