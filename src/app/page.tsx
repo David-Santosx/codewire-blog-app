@@ -23,8 +23,13 @@ async function getNews() {
       : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     
     const res = await fetch(`${baseUrl}/api/news`, { 
-      next: { revalidate: 60 },
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        // Add any required authentication headers here
+        // For example, if you're using an API key:
+        // 'Authorization': `Bearer ${process.env.API_KEY}`
+      }
     });
     
     if (!res.ok) {
