@@ -22,13 +22,12 @@ async function getNews() {
       ? `https://${process.env.VERCEL_URL}` 
       : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     
-    // When running on the server, we need to use an absolute URL
-    // that points to the deployed site, not localhost
     const isServer = typeof window === 'undefined';
     
-    // For server-side rendering, use direct database access or a relative URL
-    // that Next.js will resolve correctly
-    const apiUrl = isServer ? '/api/news' : '/api/news';
+    // Always use an absolute URL for server-side requests
+    const apiUrl = isServer 
+      ? `${baseUrl}/api/news` 
+      : '/api/news';
     
     const res = await fetch(apiUrl, { 
       next: { revalidate: 60 },
