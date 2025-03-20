@@ -13,18 +13,22 @@ function NewsLoading() {
   );
 }
 
-// Update your getNews function
 export const dynamic = 'force-dynamic';
 
 async function getNews() {
   try {
-    // Use relative URL instead of absolute URL
-    const res = await fetch('/api/news', { 
-      next: { revalidate: 60 } // Revalidate every 60 seconds
+    // Use absolute URL with environment variable
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    
+    const res = await fetch(`${baseUrl}/api/news`, { 
+      next: { revalidate: 60 },
+      cache: 'no-store'
     });
     
     if (!res.ok) {
-      throw new Error('Failed to fetch news');
+      throw new Error(`Failed to fetch news: ${res.status}`);
     }
     
     return res.json();
