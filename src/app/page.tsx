@@ -17,22 +17,19 @@ export const dynamic = 'force-dynamic';
 
 async function getNews() {
   try {
-    // Use absolute URL with environment variable
+    // Fix the URL construction for Vercel environment
     const baseUrl = process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
-      : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+      : 'http://localhost:3000';
     
-    const isServer = typeof window === 'undefined';
+    // For server-side rendering in production, use direct database access
+    // instead of API routes if possible
+    const apiUrl = `${baseUrl}/api/news`;
     
-    // Always use an absolute URL for server-side requests
-    const apiUrl = isServer 
-      ? `${baseUrl}/api/news` 
-      : '/api/news';
+    console.log("Fetching from URL:", apiUrl); // Debug log
     
-    // Choose one caching strategy - using revalidate for time-based revalidation
     const res = await fetch(apiUrl, { 
       next: { revalidate: 60 }
-      // Removed the conflicting cache: 'no-store' option
     });
     
     if (!res.ok) {
