@@ -2,9 +2,8 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib';
 import { put, del } from '@vercel/blob';
 
-// Add these new configuration exports
-export const runtime = "edge";
-export const preferredRegion = ["iad1"];
+// Update configuration to use nodejs runtime instead of edge
+export const runtime = "nodejs";
 
 // Route to list all news
 export async function GET() {
@@ -17,6 +16,7 @@ export async function GET() {
     
     return NextResponse.json(news, {
       headers: {
+        'Access-Control-Allow-Origin': '*',
         'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
       }
     });

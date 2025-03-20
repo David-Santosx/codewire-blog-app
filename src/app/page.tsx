@@ -22,17 +22,18 @@ async function getNews() {
       ? `https://${process.env.VERCEL_URL}` 
       : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     
+    console.log('Fetching from URL:', `${baseUrl}/api/news`);
+    
     const res = await fetch(`${baseUrl}/api/news`, { 
       cache: 'no-store',
       headers: {
-        'Content-Type': 'application/json',
-        // Add any required authentication headers here
-        // For example, if you're using an API key:
-        // 'Authorization': `Bearer ${process.env.API_KEY}`
+        'Content-Type': 'application/json'
       }
     });
     
     if (!res.ok) {
+      const errorText = await res.text();
+      console.error(`Error response (${res.status}):`, errorText);
       throw new Error(`Failed to fetch news: ${res.status}`);
     }
     
