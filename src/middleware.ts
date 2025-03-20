@@ -2,8 +2,14 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isAdminRoute = createRouteMatcher(["/dashboard(.*)"]);
+// Add a matcher for public API routes
+const isPublicApiRoute = createRouteMatcher(["/api/news(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
+  // Skip authentication for public API routes
+  if (isPublicApiRoute(req)) {
+    return NextResponse.next();
+  }
   
   if (
     isAdminRoute(req) &&
