@@ -13,26 +13,23 @@ function NewsLoading() {
   );
 }
 
+// Update your getNews function
+export const dynamic = 'force-dynamic';
+
 async function getNews() {
   try {
-    // Use absolute URL with origin for server component
-    const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
-      (typeof window !== "undefined"
-        ? window.location.origin
-        : "http://localhost:3000");
-
-    const response = await fetch(`${origin}/api/news`, {
-      cache: "no-store",
+    // Use relative URL instead of absolute URL
+    const res = await fetch('/api/news', { 
+      next: { revalidate: 60 } // Revalidate every 60 seconds
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch news");
+    
+    if (!res.ok) {
+      throw new Error('Failed to fetch news');
     }
-
-    return await response.json();
+    
+    return res.json();
   } catch (error) {
-    console.error("Error fetching news:", error);
+    console.error('Error fetching news:', error);
     return [];
   }
 }

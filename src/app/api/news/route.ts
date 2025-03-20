@@ -5,8 +5,18 @@ import { put, del } from '@vercel/blob';
 // Route to list all news
 export async function GET() {
   try {
-    const news = await prisma.news.findMany();
-    return NextResponse.json(news);
+    const news = await prisma.news.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+    
+    // Add cache control headers
+    return NextResponse.json(news, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
+      }
+    });
   } catch (error) {
     console.error('Error fetching news:', error);
     return NextResponse.json({ error: 'Falha ao buscar notícias' }, { status: 500 });

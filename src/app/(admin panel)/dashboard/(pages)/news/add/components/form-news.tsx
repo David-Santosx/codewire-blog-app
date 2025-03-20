@@ -33,6 +33,15 @@ import { cn } from "@/lib/utils";
 import { Editor } from "./editor";
 import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import dynamic from "next/dynamic";
+
+// Dynamically import the editor with no SSR
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[300px] w-full border rounded-md bg-zinc-100 dark:bg-zinc-800 animate-pulse"></div>
+  ),
+});
 
 export const formSchema = z.object({
   title: z

@@ -1,3 +1,7 @@
+// Add this to the top of your file
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 import { NewsAddForm } from "./components/form-news";
 
 export default function NewsAddPage() {
