@@ -29,9 +29,10 @@ async function getNews() {
       ? `${baseUrl}/api/news` 
       : '/api/news';
     
+    // Choose one caching strategy - using revalidate for time-based revalidation
     const res = await fetch(apiUrl, { 
-      next: { revalidate: 60 },
-      cache: 'no-store'
+      next: { revalidate: 60 }
+      // Removed the conflicting cache: 'no-store' option
     });
     
     if (!res.ok) {
