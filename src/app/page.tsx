@@ -25,9 +25,10 @@ async function getNews() {
     // When running on the server, we need to use an absolute URL
     // that points to the deployed site, not localhost
     const isServer = typeof window === 'undefined';
-    const apiUrl = isServer && process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}/api/news`
-      : '/api/news';
+    
+    // For server-side rendering, use direct database access or a relative URL
+    // that Next.js will resolve correctly
+    const apiUrl = isServer ? '/api/news' : '/api/news';
     
     const res = await fetch(apiUrl, { 
       next: { revalidate: 60 },
