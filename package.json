@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prisma-dev": "dotenv -e .env.local prisma migrate dev ",
-    "build": "prisma generate && prisma migrate reset --force && next build",
+    "build": "prisma generate && prisma db push --accept-data-loss && next build",
     "start": "next start",
     "lint": "next lint"
   },
