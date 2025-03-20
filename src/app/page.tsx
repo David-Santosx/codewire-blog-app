@@ -22,18 +22,19 @@ async function getNews() {
       ? `https://${process.env.VERCEL_URL}` 
       : process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     
-    console.log('Fetching from URL:', `${baseUrl}/api/news`);
+    // When running on the server, we need to use an absolute URL
+    // that points to the deployed site, not localhost
+    const isServer = typeof window === 'undefined';
+    const apiUrl = isServer && process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}/api/news`
+      : '/api/news';
     
-    const res = await fetch(`${baseUrl}/api/news`, { 
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    const res = await fetch(apiUrl, { 
+      next: { revalidate: 60 },
+      cache: 'no-store'
     });
     
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error(`Error response (${res.status}):`, errorText);
       throw new Error(`Failed to fetch news: ${res.status}`);
     }
     
