@@ -211,27 +211,42 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
           {news.subtitle && (
             <p className="text-lg text-muted-foreground">{news.subtitle}</p>
           )}
-          
+
           {/* Author information */}
           <div className="flex items-center mt-4 pt-4 border-t border-border">
             <div className="flex items-center">
               <Avatar className="h-12 w-12 mr-3">
-                <AvatarImage src="https://github.com/David-Santosx.png" alt="David Santos" />
+                <AvatarImage
+                  src="https://github.com/David-Santosx.png"
+                  alt="David Santos"
+                />
                 <AvatarFallback>DS</AvatarFallback>
               </Avatar>
               <div>
-                <div className="text-xs text-muted-foreground mb-1">Postado por</div>
+                <div className="text-xs text-muted-foreground mb-1">
+                  Postado por
+                </div>
                 <p className="font-medium">David Santos</p>
-                <p className="text-sm text-muted-foreground">Desenvolvedor Web</p>
+                <p className="text-sm text-muted-foreground">
+                  Desenvolvedor Web
+                </p>
               </div>
             </div>
             <div className="ml-auto flex gap-2">
-              <Link href="https://www.linkedin.com/in/david-willians-dos-santos-212932254/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.linkedin.com/in/david-willians-dos-santos-212932254/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="ghost" size="icon" className="h-8 w-8">
                   <Linkedin className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="https://github.com/David-Santosx" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://github.com/David-Santosx"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="ghost" size="icon" className="h-8 w-8">
                   <Github className="h-4 w-4" />
                 </Button>
@@ -254,31 +269,17 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
 
       {/* Article content */}
       <div className="px-4 md:px-8 lg:px-12 py-6">
-        {/* Featured image */}
-        <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-8">
-          <Image
-            src={news.image || "https://placehold.co/1200x630/png"}
-            alt={news.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        
         {/* Content */}
         <div className="max-w-3xl mx-auto">
-          <ArticleContent 
-            html={news.content?.html || ""} 
-            className="mb-8"
-          />
-          
+          <ArticleContent html={news.content?.html || ""} className="mb-8" />
+
           {/* Source */}
           <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
             <span className="font-medium">Fonte:</span> {news.source}
           </div>
         </div>
       </div>
-      
+
       {/* Continue Reading section */}
       {nextArticle && (
         <div className="mt-12 border-t border-border pt-8 px-4 md:px-8 lg:px-12">
@@ -286,7 +287,7 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
             Continue Lendo <ArrowRight className="ml-2 h-4 w-4" />
           </h3>
           <Link href={`/news/${nextArticle.id}`} className="block">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 hover:bg-accent/50 p-4 rounded-lg transition-colors">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 hover:bg-accent/50 p-4 rounded-lg transition-colors my-4">
               <div className="relative aspect-video rounded-lg overflow-hidden">
                 <Image
                   src={nextArticle.image || "https://placehold.co/600x400/png"}
@@ -301,11 +302,17 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
                 </span>
                 <h4 className="text-lg font-bold">{nextArticle.title}</h4>
                 {nextArticle.subtitle && (
-                  <p className="text-muted-foreground line-clamp-2">{nextArticle.subtitle}</p>
+                  <p className="text-muted-foreground line-clamp-2">
+                    {nextArticle.subtitle}
+                  </p>
                 )}
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4 mr-1" />
-                  <span>{new Date(nextArticle.createdAt).toLocaleDateString("pt-BR")}</span>
+                  <span>
+                    {new Date(nextArticle.createdAt).toLocaleDateString(
+                      "pt-BR"
+                    )}
+                  </span>
                 </div>
               </div>
             </div>

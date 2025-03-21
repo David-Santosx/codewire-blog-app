@@ -186,7 +186,7 @@ export default function AppFooter() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-zinc-400 hover:text-[#fbbe28] border-zinc-700 hover:border-[#fbbe28] hover:bg-zinc-800"
+                  className="text-zinc-400 hover:text-[#fbbe28] border-zinc-700 hover:border-[#fbbe28] hover:bg-zinc-800 my-2"
                 >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Readme
