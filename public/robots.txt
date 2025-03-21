@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://code-wire-blog.vercel.app/sitemap.xml
+
+# Disallow admin panel
+Disallow: /dashboard/
+Disallow: /auth/

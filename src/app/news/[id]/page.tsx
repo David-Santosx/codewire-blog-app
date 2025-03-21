@@ -38,12 +38,14 @@ export async function generateMetadata(
     };
   }
   
-  // Extract plain text from HTML content for description (first 160 characters)
+  // Create a clean description from the content (remove HTML tags)
   const contentText = news.content?.html 
     ? news.content.html.replace(/<[^>]*>/g, "").substring(0, 160) + "..."
-    : "";
+    : "Leia esta notícia completa no CodeWire, seu portal de tecnologia e programação.";
+
+  // Format date for structured data
+  const formattedDate = new Date(news.createdAt).toISOString();
   
-  // Return metadata object
   return {
     title: `${news.title} | CodeWire`,
     description: news.subtitle || contentText,
