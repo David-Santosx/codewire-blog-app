@@ -37,11 +37,17 @@ export default function AppFooter() {
           {/* Logo and description */}
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <Image src={CodeWire} alt="CodeWire Logo" width={150} height={40} />
+              <Image
+                src={CodeWire}
+                alt="CodeWire Logo"
+                width={150}
+                height={40}
+              />
             </Link>
             <p className="text-zinc-400 text-sm">
-              Um portal de notícias e artigos sobre tecnologia, programação e inovação.
-              Desenvolvido como projeto de estudo e compartilhamento de conhecimento.
+              Um portal de notícias e artigos sobre tecnologia, programação e
+              inovação. Desenvolvido como projeto de estudo e compartilhamento
+              de conhecimento.
             </p>
           </div>
 
@@ -50,22 +56,34 @@ export default function AppFooter() {
             <h3 className="text-white font-bold text-lg">Links Úteis</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-zinc-400 hover:text-[#fbbe28] transition-colors">
+                <Link
+                  href="/"
+                  className="text-zinc-400 hover:text-[#fbbe28] transition-colors"
+                >
                   Página Inicial
                 </Link>
               </li>
               <li>
-                <Link href="/sobre" className="text-zinc-400 hover:text-[#fbbe28] transition-colors">
+                <Link
+                  href="/sobre"
+                  className="text-zinc-400 hover:text-[#fbbe28] transition-colors"
+                >
                   Sobre o Projeto
                 </Link>
               </li>
               <li>
-                <Link href="/contribuir" className="text-zinc-400 hover:text-[#fbbe28] transition-colors">
+                <Link
+                  href="/contribuir"
+                  className="text-zinc-400 hover:text-[#fbbe28] transition-colors"
+                >
                   Como Contribuir
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="text-zinc-400 hover:text-[#fbbe28] transition-colors">
+                <Link
+                  href="/dashboard"
+                  className="text-zinc-400 hover:text-[#fbbe28] transition-colors"
+                >
                   Dashboard
                 </Link>
               </li>
@@ -78,7 +96,7 @@ export default function AppFooter() {
             <ul className="space-y-2">
               {categories.slice(0, 8).map((category) => (
                 <li key={category}>
-                  <a 
+                  <a
                     href={`/?category=${encodeURIComponent(category)}`}
                     onClick={(e) => handleCategoryClick(category, e)}
                     className="text-zinc-400 hover:text-[#fbbe28] transition-colors cursor-pointer"
@@ -88,7 +106,10 @@ export default function AppFooter() {
                 </li>
               ))}
               <li>
-                <Link href="/" className="text-[#fbbe28] hover:underline text-sm">
+                <Link
+                  href="/"
+                  className="text-[#fbbe28] hover:underline text-sm"
+                >
                   Ver todas as categorias
                 </Link>
               </li>
@@ -100,34 +121,73 @@ export default function AppFooter() {
             <h3 className="text-white font-bold text-lg">Contato</h3>
             <div className="flex items-center space-x-2">
               <Mail className="h-4 w-4 text-zinc-400" />
-              <a href="mailto:willians.sant@proton.me" className="text-zinc-400 hover:text-[#fbbe28] transition-colors">
+              <a
+                href="mailto:willians.sant@proton.me"
+                className="text-zinc-400 hover:text-[#fbbe28] transition-colors"
+              >
                 willians.sant@proton.me
               </a>
             </div>
             <div className="space-y-2">
-              <h4 className="text-zinc-300 font-medium text-sm">Redes Sociais</h4>
+              <h4 className="text-zinc-300 font-medium text-sm">
+                Redes Sociais
+              </h4>
               <div className="flex space-x-2">
-                <Link href="https://github.com/David-Santosx/codewire-blog-app" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800">
+                <Link
+                  href="https://github.com/David-Santosx/codewire-blog-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800"
+                  >
                     <Github className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="https://www.linkedin.com/in/david-willians-dos-santos-212932254/" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800">
+                <Link
+                  href="https://www.linkedin.com/in/david-willians-dos-santos-212932254/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800"
+                  >
                     <Linkedin className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800">
+                <Link
+                  href="https://www.instagram.com/leao.willians"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-zinc-400 hover:text-[#fbbe28] hover:bg-zinc-800"
+                  >
                     <Instagram className="h-4 w-4" />
                   </Button>
                 </Link>
               </div>
             </div>
             <div className="space-y-2">
-              <h4 className="text-zinc-300 font-medium text-sm">Documentação</h4>
-              <Link href="https://github.com/David-Santosx/codewire-blog-app#readme" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="text-zinc-400 hover:text-[#fbbe28] border-zinc-700 hover:border-[#fbbe28] hover:bg-zinc-800">
+              <h4 className="text-zinc-300 font-medium text-sm">
+                Documentação
+              </h4>
+              <Link
+                href="https://github.com/David-Santosx/codewire-blog-app#readme"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-zinc-400 hover:text-[#fbbe28] border-zinc-700 hover:border-[#fbbe28] hover:bg-zinc-800"
+                >
                   <BookOpen className="h-4 w-4 mr-2" />
                   Readme
                 </Button>
@@ -144,8 +204,13 @@ export default function AppFooter() {
           </p>
           <div className="flex items-center mt-4 md:mt-0">
             <p className="text-zinc-500 text-sm flex items-center">
-              Feito com <Heart className="h-3 w-3 mx-1 text-red-500" /> por 
-              <Link href="https://github.com/David-Santosx" target="_blank" rel="noopener noreferrer" className="ml-1 text-[#fbbe28] hover:underline">
+              Feito com <Heart className="h-3 w-3 mx-1 text-red-500" /> por
+              <Link
+                href="https://github.com/David-Santosx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-[#fbbe28] hover:underline"
+              >
                 David Santos
               </Link>
             </p>

@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, Loader2, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AppHeader from "@/app/components/header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,6 +10,7 @@ import { Github, Linkedin } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
 import AppFooter from "@/app/components/footer";
+import { ArticleContent } from "@/components/ui/article-content";
 
 // Loading component
 function NewsLoading() {
@@ -253,58 +254,58 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
 
       {/* Article content */}
       <div className="px-4 md:px-8 lg:px-12 py-6">
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <div
-            dangerouslySetInnerHTML={{ __html: news.content?.html || "" }}
-            className="prose prose-lg max-w-none prose-img:rounded-lg prose-headings:font-bold prose-a:text-primary"
+        {/* Featured image */}
+        <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-8">
+          <Image
+            src={news.image || "https://placehold.co/1200x630/png"}
+            alt={news.title}
+            fill
+            className="object-cover"
+            priority
           />
         </div>
-
-        {/* Source attribution */}
-        {news.source && (
-          <div className="mt-8 text-sm text-muted-foreground">
-            <p>
-              <strong>Fonte:</strong> {news.source}
-            </p>
+        
+        {/* Content */}
+        <div className="max-w-3xl mx-auto">
+          <ArticleContent 
+            html={news.content?.html || ""} 
+            className="mb-8"
+          />
+          
+          {/* Source */}
+          <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
+            <span className="font-medium">Fonte:</span> {news.source}
           </div>
-        )}
+        </div>
       </div>
-
+      
       {/* Continue Reading section */}
       {nextArticle && (
-        <div className="mt-12 px-4 md:px-8 lg:px-12 py-6 border-t border-border">
-          <h2 className="text-xl font-bold mb-4">Continue Lendo</h2>
-          <Link 
-            href={`/news/${nextArticle.id}`}
-            className="block bg-card rounded-lg overflow-hidden shadow hover:shadow-md transition-all duration-300 border border-border transform hover:-translate-y-1 hover:border-primary"
-          >
-            <div className="flex flex-col md:flex-row">
-              <div className="relative w-full md:w-1/3 h-[200px]">
+        <div className="mt-12 border-t border-border pt-8 px-4 md:px-8 lg:px-12">
+          <h3 className="text-xl font-bold mb-4 flex items-center">
+            Continue Lendo <ArrowRight className="ml-2 h-4 w-4" />
+          </h3>
+          <Link href={`/news/${nextArticle.id}`} className="block">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 hover:bg-accent/50 p-4 rounded-lg transition-colors">
+              <div className="relative aspect-video rounded-lg overflow-hidden">
                 <Image
                   src={nextArticle.image || "https://placehold.co/600x400/png"}
                   alt={nextArticle.title}
                   fill
-                  className="object-cover object-center"
+                  className="object-cover"
                 />
               </div>
-              <div className="p-4 md:w-2/3 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <span className="text-xs font-medium bg-primary/10 text-primary px-2 py-1 rounded-md">
-                      {nextArticle.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground ml-2">
-                      {new Date(nextArticle.createdAt).toLocaleDateString("pt-BR")}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{nextArticle.title}</h3>
-                  {nextArticle.subtitle && (
-                    <p className="text-muted-foreground line-clamp-2 mb-4">{nextArticle.subtitle}</p>
-                  )}
-                </div>
-                <div className="flex items-center text-primary font-medium">
-                  Continuar lendo
-                  <ArrowRight className="ml-2 h-4 w-4" />
+              <div className="md:col-span-2 space-y-2">
+                <span className="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                  {nextArticle.category}
+                </span>
+                <h4 className="text-lg font-bold">{nextArticle.title}</h4>
+                {nextArticle.subtitle && (
+                  <p className="text-muted-foreground line-clamp-2">{nextArticle.subtitle}</p>
+                )}
+                <div className="flex items-center text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4 mr-1" />
+                  <span>{new Date(nextArticle.createdAt).toLocaleDateString("pt-BR")}</span>
                 </div>
               </div>
             </div>
