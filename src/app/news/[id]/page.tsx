@@ -100,7 +100,7 @@ async function getNewsById(id: string) {
 async function getRelatedNews(category: string, currentId: string) {
   try {
     const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.API_URL ||
       (typeof window !== "undefined"
         ? window.location.origin
         : "http://localhost:3000");
