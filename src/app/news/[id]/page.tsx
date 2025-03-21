@@ -11,6 +11,8 @@ import { ArrowRight } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
 import AppFooter from "@/app/components/footer";
 import { ArticleContent } from "@/components/ui/article-content";
+import { ArticleTOC } from "@/components/ui/article-toc";
+import { MobileTOC } from "@/components/ui/mobile-toc";
 
 // Loading component
 function NewsLoading() {
@@ -271,13 +273,37 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
 
       {/* Article content */}
       <div className="px-4 md:px-8 lg:px-12 py-6">
-        {/* Content */}
-        <div className="max-w-3xl mx-auto">
-          <ArticleContent html={news.content?.html || ""} className="mb-8" />
-
-          {/* Source */}
-          <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
-            <span className="font-medium">Fonte:</span> {news.source}
+        {/* Featured image */}
+        <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-8">
+          <Image
+            src={news.image || "https://placehold.co/1200x630/png"}
+            alt={news.title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        
+        {/* Content with sidebar */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Main content */}
+          <div className="lg:col-span-3">
+            <div id="article-content" className="max-w-3xl">
+              <ArticleContent 
+                html={news.content?.html || ""} 
+                className="mb-8"
+              />
+              
+              {/* Source */}
+              <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
+                <span className="font-medium">Fonte:</span> {news.source}
+              </div>
+            </div>
+          </div>
+          
+          {/* Sidebar with TOC */}
+          <div className="hidden lg:block">
+            <ArticleTOC contentId="article-content" />
           </div>
         </div>
       </div>
