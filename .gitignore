@@ -75,3 +75,6 @@ temp/
 .cache/
 .eslintcache
 .stylelintcache
+
+# Misc
+server.json

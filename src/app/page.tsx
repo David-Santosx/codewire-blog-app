@@ -18,9 +18,9 @@ export const dynamic = 'force-dynamic';
 async function getNews() {
   try {
     // Fix the URL construction for Vercel environment
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : 'http://localhost:3000';
+    const baseUrl = process.env.API_URL
+      ? `https://${process.env.API_URL}`
+      : "http://localhost:3000";
     
     // For server-side rendering in production, use direct database access
     // instead of API routes if possible

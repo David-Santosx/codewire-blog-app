@@ -76,7 +76,7 @@ export async function generateMetadata(
 async function getNewsById(id: string) {
   try {
     const origin =
-      process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.API_URL ||
       (typeof window !== "undefined"
         ? window.location.origin
         : "http://localhost:3000");

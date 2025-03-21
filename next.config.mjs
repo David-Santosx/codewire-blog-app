@@ -7,6 +7,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    API_URL: "https://code-wire-blog.vercel.app",
+  },
 };
 
 export default nextConfig;
