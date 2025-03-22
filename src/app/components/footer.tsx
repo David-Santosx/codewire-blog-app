@@ -12,7 +12,6 @@ export default function AppFooter() {
   const currentYear = new Date().getFullYear();
   const router = useRouter();
 
-  // Categories from your form schema
   const categories = [
     "Programação",
     "Inteligência Artificial",
@@ -24,7 +23,6 @@ export default function AppFooter() {
     "Software"
   ];
 
-  // Handle category selection
   const handleCategoryClick = (category: string, e: React.MouseEvent) => {
     e.preventDefault();
     router.push(`/?category=${encodeURIComponent(category)}`);

@@ -32,7 +32,6 @@ export default function AdsPage() {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  // Carregar configurações existentes
   useEffect(() => {
     async function loadSettings() {
       try {
@@ -42,7 +41,6 @@ export default function AdsPage() {
           setSettings(data);
           setPreviewImage(data.headerAd.imageUrl);
         } else {
-          // Se não existir, usar valores padrão
           console.log("Nenhuma configuração de anúncio encontrada, usando valores padrão");
         }
       } catch (error) {
@@ -61,8 +59,7 @@ export default function AdsPage() {
       setFile(selectedFile);
       const objectUrl = URL.createObjectURL(selectedFile);
       setPreviewImage(objectUrl);
-      
-      // Limpar URL do objeto quando o componente for desmontado
+
       return () => URL.revokeObjectURL(objectUrl);
     }
   };
@@ -70,7 +67,6 @@ export default function AdsPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Se houver um novo arquivo, fazer upload primeiro
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
@@ -89,7 +85,6 @@ export default function AdsPage() {
         settings.headerAd.imageUrl = url;
       }
       
-      // Salvar configurações
       const response = await fetch("/api/ads", {
         method: "POST",
         headers: {

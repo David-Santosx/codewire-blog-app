@@ -1,10 +1,8 @@
 export default async function getCurrentWeahter(lat: number, lon: number) {
-  // Check for API key with fallback for development
   const apiKey = process.env.OPENWEATHER_API_KEY || process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
   
   if (!apiKey) {
     console.error("OpenWeather API key is missing in environment variables");
-    // Return default values instead of throwing an error
     return {
       currentWeather: 0,
       currentLocation: "Localização indisponível",

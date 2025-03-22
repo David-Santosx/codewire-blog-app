@@ -16,7 +16,6 @@ interface News {
   category: string;
   createdAt: string;
   isFeatured: boolean;
-  // Add other fields as needed
 }
 
 export default function NewsPage() {
@@ -24,13 +23,11 @@ export default function NewsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Function to handle news deletion
   const handleDeleteNews = async (id: string) => {
     if (window.confirm("Tem certeza que deseja excluir esta notícia?")) {
       const result = await deleteNews(id);
       
       if (result.success) {
-        // Update the state to remove the deleted news
         setNews(news.filter(item => item.id !== id));
         toast.success("Notícia excluída com sucesso");
       } else {
@@ -39,7 +36,6 @@ export default function NewsPage() {
     }
   };
 
-  // Fetch news data
   useEffect(() => {
     async function fetchNews() {
       try {
@@ -62,7 +58,6 @@ export default function NewsPage() {
     fetchNews();
   }, []);
 
-  // Pass the delete handler to the columns
   const tableColumns = columns.map(col => {
     if (col.id === "actions") {
       return {

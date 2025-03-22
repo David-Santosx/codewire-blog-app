@@ -12,22 +12,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Nenhum arquivo enviado' }, { status: 400 });
     }
     
-    // Validar tipo de arquivo
     const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!validTypes.includes(file.type)) {
       return NextResponse.json({ error: 'Tipo de arquivo inválido' }, { status: 400 });
     }
     
-    // Validar tamanho do arquivo (2MB)
     if (file.size > 2 * 1024 * 1024) {
       return NextResponse.json({ error: 'Arquivo muito grande (máximo 2MB)' }, { status: 400 });
     }
     
-    // Gerar nome de arquivo único
     const extension = file.name.split('.').pop();
     const fileName = `${type}-${uuidv4()}.${extension}`;
     
-    // Fazer upload para o Vercel Blob Storage
     const blob = await put(fileName, file, {
       access: 'public',
     });

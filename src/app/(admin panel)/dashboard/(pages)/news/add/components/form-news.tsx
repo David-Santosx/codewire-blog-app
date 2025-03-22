@@ -35,7 +35,6 @@ import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import dynamic from "next/dynamic";
 
-// Dynamically import the editor with no SSR
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
   loading: () => (
@@ -178,7 +177,6 @@ export function NewsAddForm() {
     },
   });
 
-  // Set initial category value based on form default
   React.useEffect(() => {
     const category = categories.find(
       (cat) => cat.label === form.getValues().category
@@ -211,10 +209,8 @@ export function NewsAddForm() {
   
       const result = await response.json();
       form.reset();
-      // You can add a toast notification here to show success
     } catch (error) {
       console.error("Error submitting form:", error);
-      // You can add a toast notification here to show error
     }
   }
 

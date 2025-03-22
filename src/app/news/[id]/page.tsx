@@ -14,7 +14,6 @@ import { ArticleContent } from "@/components/ui/article-content";
 import { ArticleTOC } from "@/components/ui/article-toc";
 import { MobileTOC } from "@/components/ui/mobile-toc";
 
-// Loading component
 function NewsLoading() {
   return (
     <div className="flex items-center justify-center py-20">
@@ -24,15 +23,12 @@ function NewsLoading() {
   );
 }
 
-// Generate metadata for the page
 export async function generateMetadata(
   { params }: { params: { id: string } },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Fetch news data
   const news = await getNewsById(params.id);
   
-  // If news not found, return default metadata
   if (!news) {
     return {
       title: "Notícia não encontrada | CodeWire",
@@ -40,12 +36,10 @@ export async function generateMetadata(
     };
   }
   
-  // Create a clean description from the content (remove HTML tags)
   const contentText = news.content?.html 
     ? news.content.html.replace(/<[^>]*>/g, "").substring(0, 160) + "..."
     : "Leia esta notícia completa no CodeWire, seu portal de tecnologia e programação.";
 
-  // Format date for structured data
   const formattedDate = new Date(news.createdAt).toISOString();
   
   return {
@@ -77,7 +71,6 @@ export async function generateMetadata(
   };
 }
 
-// Fetch a single news article by ID
 async function getNewsById(id: string) {
   try {
     const origin =
@@ -101,7 +94,6 @@ async function getNewsById(id: string) {
   }
 }
 
-// Fetch related news (same category)
 async function getRelatedNews(category: string, currentId: string) {
   try {
     const origin =
@@ -130,7 +122,6 @@ async function getRelatedNews(category: string, currentId: string) {
   }
 }
 
-// Fetch a random news article (different from current)
 async function getRandomNews(currentId: string) {
   try {
     const origin =
@@ -163,20 +154,17 @@ async function getRandomNews(currentId: string) {
   }
 }
 
-// News content component
 function NewsArticle({ news, relatedNews, nextArticle }: { 
   news: any; 
   relatedNews: any[];
   nextArticle: any | null;
 }) {
-  // Format date
   const formattedDate = new Date(news.createdAt).toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "long",
     year: "numeric",
   });
 
-  // Estimate reading time (1 min per 200 words)
   const contentText = news.content?.html || "";
   const wordCount = contentText.replace(/<[^>]*>/g, "").split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
@@ -392,15 +380,10 @@ export default async function NewsPage({
 }) {
   const news = await getNewsById(params.id);
 
-  // If news not found, return 404
   if (!news) {
     notFound();
   }
-
-  // Get related news
   const relatedNews = await getRelatedNews(news.category, news.id);
-  
-  // Get random article for "Continue Reading"
   const nextArticle = await getRandomNews(params.id);
 
   return (

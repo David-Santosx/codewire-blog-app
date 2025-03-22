@@ -4,7 +4,6 @@ import { FileQuestion } from "lucide-react";
 import AppHeader from "@/app/components/header";
 import { Metadata } from "next";
 
-// Add metadata for the not-found page
 export const metadata: Metadata = {
   title: "Notícia não encontrada | CodeWire",
   description: "A notícia que você está procurando não existe ou foi removida.",

@@ -1,6 +1,3 @@
-// Editor.tsx
-// by David - Santosx at 2025-02-28
-
 "use client";
 
 import React, { useState, useRef, useMemo } from "react";

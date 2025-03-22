@@ -1,5 +1,5 @@
 import { ClerkLoading, SignIn } from "@clerk/nextjs";
-import CodeWireLogo from "@/../public/CodeWire.png";
+import CodeWireLogo from "@/../public/CodeWire.svg";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";

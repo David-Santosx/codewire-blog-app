@@ -2,12 +2,9 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib';
 import { put, del } from '@vercel/blob';
 
-// Update configuration to use nodejs runtime instead of edge
 export const runtime = "nodejs";
-// Add cache control to prevent stale data
 export const revalidate = 0;
 
-// Route to list all news
 export async function GET() {
   try {
     const news = await prisma.news.findMany({
@@ -19,7 +16,6 @@ export async function GET() {
     return NextResponse.json(news, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        // Add cache control headers to prevent browser caching
         'Cache-Control': 'no-store, max-age=0, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0'
@@ -31,34 +27,27 @@ export async function GET() {
   }
 }
 
-// Route to add a new news item
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     
-    // Get file from form data
     const file = formData.get('image') as File;
     let imagePath = '';
     
     if (file) {
-      // Upload to Vercel Blob
       const filename = Date.now() + '-' + file.name.replace(/\s/g, '_');
       const blob = await put(filename, file, {
         access: 'public',
       });
       
-      // Use the URL provided by Vercel Blob
       imagePath = blob.url;
     }
     
-    // Get content as string (HTML)
     const contentHtml = formData.get('content') as string;
     
-    // Prepare data for database
     const data = {
       title: formData.get('title') as string,
       subtitle: formData.get('subtitle') as string || null,
-      // Wrap HTML content in a JSON object
       content: { html: contentHtml },
       category: formData.get('category') as string,
       source: formData.get('source') as string || '',
@@ -66,7 +55,6 @@ export async function POST(request: Request) {
       image: imagePath
     };
     
-    // Create news entry in database
     const newNews = await prisma.news.create({
       data
     });
@@ -77,18 +65,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Falha ao adicionar notícia' }, { status: 500 });
   }
 }
-
-// Route to delete a news item
 export async function DELETE(request: Request) {
   try {
-    // Parse the request body to get the ID
     const { id } = await request.json();
     
     if (!id) {
       return NextResponse.json({ error: 'ID da notícia é obrigatório' }, { status: 400 });
     }
 
-    // First, get the news item to retrieve the image URL
     const news = await prisma.news.findUnique({
       where: { id },
     });
@@ -97,24 +81,19 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'Notícia não encontrada' }, { status: 404 });
     }
 
-    // Delete the news item from the database
     await prisma.news.delete({
       where: { id },
     });
     
-    // If the news has an image, delete it from Vercel Blob
     if (news.image && news.image.includes('blob.vercel-storage.com')) {
       try {
-        // Extract the blob URL path
         const blobUrl = new URL(news.image);
         const pathname = blobUrl.pathname;
         const blobName = pathname.substring(pathname.lastIndexOf('/') + 1);
         
-        // Delete from Vercel Blob
         await del(blobName);
       } catch (deleteError) {
         console.error('Error deleting image from Blob storage:', deleteError);
-        // Continue execution even if image deletion fails
       }
     }
     
@@ -125,7 +104,6 @@ export async function DELETE(request: Request) {
   }
 }
 
-// Route to edit a news item
 export async function PATCH(request: Request) {
   try {
     const { id, ...data } = await request.json();

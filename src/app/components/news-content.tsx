@@ -24,31 +24,26 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   
-  // Add state for selected category, initialize with URL parameter if available
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    categoryParam
+  );
 
-  // Update selected category when URL parameter changes
   useEffect(() => {
     if (categoryParam) {
       setSelectedCategory(categoryParam);
     }
   }, [categoryParam]);
 
-  // Filter featured news
   const featuredNews = allNews.filter((news) => news.isFeatured).slice(0, 8);
 
-  // Top 3 for slider
   const sliderNews = featuredNews.slice(0, 3);
 
-  // Rest for the list
   const listNews = featuredNews.slice(3);
 
-  // Get latest news (all news sorted by date)
-  // Apply category filter if a category is selected
-  const filteredNews = selectedCategory 
-    ? allNews.filter(news => news.category === selectedCategory)
+  const filteredNews = selectedCategory
+    ? allNews.filter((news) => news.category === selectedCategory)
     : allNews;
-    
+
   const latestNews = [...filteredNews]
     .sort(
       (a, b) =>
@@ -56,10 +51,8 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
     )
     .slice(0, 8);
 
-  // Extract unique categories
   const categories = Array.from(new Set(allNews.map((news) => news.category)));
 
-  // Handle category selection
   const handleCategorySelect = (category: string | null) => {
     setSelectedCategory(category);
   };
@@ -76,9 +69,9 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
                 {selectedCategory}
               </span>
             </div>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => handleCategorySelect(null)}
               className="text-zinc-300 hover:text-white"
             >
@@ -86,10 +79,10 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
             </Button>
           </div>
         )}
-        
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground">
-            {selectedCategory ? `Notícias: ${selectedCategory}` : 'Destaques'}
+            {selectedCategory ? `Notícias: ${selectedCategory}` : "Destaques"}
           </h2>
         </div>
 
@@ -97,10 +90,12 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
           {/* Slider for top 3 featured news - takes 2/3 of the width on large screens */}
           <div className="lg:col-span-2">
             {sliderNews.length > 0 ? (
-              <FeaturedNewsSlider news={sliderNews.map(news => ({
-                ...news,
-                source: 'default' // Add required source property
-              }))} />
+              <FeaturedNewsSlider
+                news={sliderNews.map((news) => ({
+                  ...news,
+                  source: "default",
+                }))}
+              />
             ) : (
               <div className="text-center py-10 bg-card rounded-lg shadow border border-border">
                 <p className="text-muted-foreground">
@@ -156,9 +151,9 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
       {/* Category Filter Section */}
       <section className="lg:px-[80px] md:px-10 sm:px-6 px-4 py-4 overflow-x-auto">
         <div className="flex gap-2 pb-2 min-w-max">
-          <Button 
-            variant={selectedCategory === null ? "default" : "outline"} 
-            size="sm" 
+          <Button
+            variant={selectedCategory === null ? "default" : "outline"}
+            size="sm"
             className="rounded-full"
             onClick={() => handleCategorySelect(null)}
           >
@@ -182,7 +177,9 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
       <section className="lg:px-[80px] md:px-10 sm:px-6 px-4 py-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground">
-            {selectedCategory ? `Notícias: ${selectedCategory}` : "Últimas Notícias"}
+            {selectedCategory
+              ? `Notícias: ${selectedCategory}`
+              : "Últimas Notícias"}
           </h2>
         </div>
 
@@ -228,7 +225,7 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
               ) : (
                 <div className="col-span-full text-center py-10 bg-card rounded-lg shadow border border-border">
                   <p className="text-muted-foreground">
-                    {selectedCategory 
+                    {selectedCategory
                       ? `Nenhuma notícia na categoria "${selectedCategory}" disponível.`
                       : "Nenhuma notícia disponível no momento."}
                   </p>
@@ -236,8 +233,7 @@ export default function NewsContent({ allNews }: { allNews: News[] }) {
               )}
             </div>
           </div>
-          
-          {/* Sidebar with Most Read and Weekly Articles */}
+
           <div className="mt-8 lg:mt-0">
             <MostReadNews news={allNews} />
             <WeeklyArticles news={allNews} />

@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { CircleHelp, Anchor } from "lucide-react";
@@ -11,7 +10,7 @@ export default function DashboardHeader() {
       <header className="w-full px-4 py-5 flex flex-col space-y-3">
         <div className="w-full flex justify-between items-center">
           <div className="flex lg:space-x-4 space-x-1 items-center">
-            <SidebarTrigger/>
+            <SidebarTrigger />
             <h1 className="leading-7">Dashboard</h1>
           </div>
           <nav>
@@ -24,7 +23,12 @@ export default function DashboardHeader() {
                 </Link>
               </li>
               <li>
-                <Link target="_blank" href={"https://github.com/David-Santosx/codewire-blog-app?tab=readme-ov-file#readme"}>
+                <Link
+                  target="_blank"
+                  href={
+                    "https://github.com/David-Santosx/codewire-blog-app?tab=readme-ov-file#readme"
+                  }
+                >
                   <Button variant={"outline"}>
                     <CircleHelp /> Guia
                   </Button>

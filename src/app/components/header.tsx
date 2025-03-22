@@ -48,7 +48,6 @@ export default function AppHeader() {
   const [adSettings, setAdSettings] = useState<AdSettings | null>(null);
   const [adLoading, setAdLoading] = useState(true);
 
-  // Fetch ad settings
   useEffect(() => {
     async function fetchAdSettings() {
       try {
@@ -93,13 +92,11 @@ export default function AppHeader() {
     }
   }, []);
 
-  // Get the ad image URL
   const adImageUrl =
     !adLoading && adSettings?.headerAd?.isActive && adSettings.headerAd.imageUrl
       ? adSettings.headerAd.imageUrl
       : "https://placehold.co/728x90/png";
 
-  // Get the ad link URL
   const adLinkUrl =
     !adLoading && adSettings?.headerAd?.linkUrl
       ? adSettings.headerAd.linkUrl

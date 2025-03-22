@@ -18,24 +18,19 @@ export default function DashboardPage() {
   useEffect(() => {
     async function fetchStats() {
       try {
-        // Fetch news data
         const newsResponse = await fetch("/api/news");
         if (newsResponse.ok) {
           const newsData = await newsResponse.json();
           
-          // Calculate stats
           const totalNews = newsData.length;
           const featuredNews = newsData.filter((news: { isFeatured: any; }) => news.isFeatured).length;
           
-          // Get last month's data (simulated)
           const lastMonthDate = new Date();
           lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
           const recentNews = newsData.filter(
             (news: { createdAt: string | number | Date; }) => new Date(news.createdAt) > lastMonthDate
           ).length;
           
-          // For views, we could fetch from analytics API if available
-          // For now, let's simulate with a calculation based on news count
           const estimatedViews = totalNews * 150 + Math.floor(Math.random() * 500);
           
           setStats({

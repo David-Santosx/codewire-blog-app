@@ -6,7 +6,6 @@ type NewsToAdd = z.infer<typeof formSchema>;
 
 const API_URL = "/api/news";
 
-// Função auxiliar para fazer requisições HTTP
 async function fetchAPI<T>(endpoint: string, method: string, data?: any): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     method,
@@ -24,7 +23,6 @@ async function fetchAPI<T>(endpoint: string, method: string, data?: any): Promis
   return response.json();
 }
 
-// Função principal para adicionar notícias
 export default async function addNews(newsToAdd: NewsToAdd) {
   try {
     // Preparar os dados da notícia
@@ -37,10 +35,9 @@ export default async function addNews(newsToAdd: NewsToAdd) {
       highlightText: newsToAdd.highlightText,
       isFeatured: newsToAdd.isFeatured,
       createdAt: new Date().toISOString(),
-      image: newsToAdd.image ? newsToAdd.image.toString() : "", // Convert image to string
+      image: newsToAdd.image ? newsToAdd.image.toString() : "",
     };
 
-    // Enviar para a API
     return await fetchAPI("/api/news", "POST", newsData);
   } catch (error) {
     console.error("Error adding news:", error);

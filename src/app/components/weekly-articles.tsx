@@ -16,9 +16,6 @@ interface News {
 }
 
 export default function WeeklyArticles({ news }: { news: News[] }) {
-  // Get articles from the current week
-  // In a real app, you would filter by the current week
-  // For demonstration, we'll take the most recent articles
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
   
@@ -26,7 +23,6 @@ export default function WeeklyArticles({ news }: { news: News[] }) {
     .filter(article => new Date(article.createdAt) >= oneWeekAgo)
     .slice(0, 5);
 
-  // If no articles from this week, show the most recent ones
   const articlesToShow = weeklyArticles.length > 0 
     ? weeklyArticles 
     : news.slice(0, 5);

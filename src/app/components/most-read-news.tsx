@@ -16,9 +16,7 @@ interface News {
 }
 
 export default function MostReadNews({ news }: { news: News[] }) {
-  // For demonstration, we'll simulate "most read" by taking the first 5 news items
-  // In a real app, you would track views and sort by popularity
-  const mostReadNews = news.slice(0, 5);
+  const mostReadNews = news.slice(0, 3);
 
   return (
     <div className="space-y-4">

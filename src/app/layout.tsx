@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "CodeWire - Notícias de Tecnologia & Informação",
@@ -73,6 +74,7 @@ export default function RootLayout({
   return (
     <>
       <SpeedInsights />
+      <Analytics/>
       <ClerkProvider appearance={{ variables: { colorPrimary: "#fbbe28" } }}>
         <html
           lang="pt-BR"

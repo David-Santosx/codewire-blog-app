@@ -19,7 +19,6 @@ interface NewsItem {
 export default function FeaturedNewsSlider({ news }: { news: NewsItem[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-advance the slider every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % news.length);

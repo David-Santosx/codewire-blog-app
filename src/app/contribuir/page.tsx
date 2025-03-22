@@ -6,10 +6,8 @@ import { Code, Github, Heart, Laptop, Mail, MessageSquare, Share2 } from "lucide
 import Image from "next/image";
 import Link from "next/link";
 import AppHeader from "../components/header";
-// Add the import at the top of the file
 import AppFooter from "../components/footer";
 
-// At the end of your component, before the closing return tag:
 export default function ContribuirPage() {
   return (
     <>

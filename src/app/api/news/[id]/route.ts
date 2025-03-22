@@ -8,7 +8,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    // Get news by ID from database
     const news = await prisma.news.findUnique({
       where: {
         id: params.id,

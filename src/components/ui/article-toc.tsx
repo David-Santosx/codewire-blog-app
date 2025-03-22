@@ -23,11 +23,9 @@ export function ArticleTOC({ contentId, className }: ArticleTOCProps) {
     const contentElement = document.getElementById(contentId);
     if (!contentElement) return;
 
-    // Extrair todos os cabeçalhos h2, h3, h4
     const headingElements = contentElement.querySelectorAll("h2, h3, h4");
     
     const items: TOCItem[] = Array.from(headingElements).map((element, index) => {
-      // Adicionar IDs aos cabeçalhos se não existirem
       if (!element.id) {
         element.id = `heading-${index}`;
       }
@@ -41,7 +39,6 @@ export function ArticleTOC({ contentId, className }: ArticleTOCProps) {
 
     setHeadings(items);
 
-    // Configurar observador de interseção para destacar o cabeçalho ativo
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

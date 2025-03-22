@@ -4,7 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
-// Define the News type
 export type News = {
   id: string;
   title: string;
