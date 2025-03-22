@@ -27,18 +27,6 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import dynamic from "next/dynamic";
-
-// Dynamically import the Editor component with SSR disabled
-const Editor = dynamic(
-  () => import("@/app/(admin panel)/dashboard/(pages)/news/add/components/editor").then(mod => mod.Editor),
-  { 
-    ssr: false,
-    loading: () => <div className="border rounded-md p-4 h-[300px] flex items-center justify-center bg-muted/20">
-      <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-    </div>
-  }
-);
 
 // Esquema de validação
 const formSchema = z.object({
@@ -46,8 +34,8 @@ const formSchema = z.object({
     message: "O título deve ter pelo menos 5 caracteres.",
   }),
   subtitle: z.string().optional(),
-  content: z.any().refine((val) => val && Object.keys(val).length > 0, {
-    message: "O conteúdo é obrigatório.",
+  content: z.string().min(10, {
+    message: "O conteúdo deve ter pelo menos 10 caracteres.",
   }),
   category: z.string().min(1, {
     message: "A categoria é obrigatória.",
@@ -68,10 +56,15 @@ export default function EditNewsForm({ news }: { news: any }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Ensure component is mounted before rendering editor
+  // Ensure component is mounted before rendering
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Convert content to string if it's an object
+  const contentValue = typeof news.content === 'object' 
+    ? JSON.stringify(news.content) 
+    : news.content;
 
   // Inicializar o formulário com os dados da notícia
   const form = useForm<FormValues>({
@@ -79,7 +72,7 @@ export default function EditNewsForm({ news }: { news: any }) {
     defaultValues: {
       title: news.title,
       subtitle: news.subtitle || "",
-      content: news.content,
+      content: contentValue,
       category: news.category,
       source: news.source,
       image: news.image,
@@ -91,14 +84,17 @@ export default function EditNewsForm({ news }: { news: any }) {
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     try {
-      const response = await fetch(`/api/news/`, {
-        method: "PATCH",
+      // Convert content back to object if needed
+      const contentToSend = values.content;
+      
+      const response = await fetch(`/api/news/${news.id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: news.id,
-          ...values
+          ...values,
+          content: contentToSend
         }),
       });
   
@@ -115,6 +111,10 @@ export default function EditNewsForm({ news }: { news: any }) {
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  if (!isMounted) {
+    return <div className="p-8 text-center">Carregando formulário...</div>;
   }
 
   return (
@@ -250,10 +250,10 @@ export default function EditNewsForm({ news }: { news: any }) {
                 <FormItem>
                   <FormLabel>Conteúdo</FormLabel>
                   <FormControl>
-                    <Editor
-                      value={field.value}
-                      onChange={field.onChange}
+                    <Textarea 
                       placeholder="Escreva o conteúdo da notícia aqui..."
+                      className="min-h-[300px]"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />

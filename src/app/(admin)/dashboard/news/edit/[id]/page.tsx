@@ -1,12 +1,17 @@
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+export const runtime = 'edge'; // Change to edge runtime
 
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import EditNewsForm from "./components/EditNewsForm";
+import dynamic from "next/dynamic";
+
+// Dynamically import the EditNewsForm component with SSR disabled
+const EditNewsForm = dynamic(
+  () => import("./components/EditNewsForm"),
+  { ssr: false }
+);
 
 // Componente de carregamento
 function EditNewsLoading() {
