@@ -28,8 +28,9 @@ async function getNews() {
     
     console.log("Fetching from URL:", apiUrl); // Debug log
     
-    const res = await fetch(apiUrl, { 
-      next: { revalidate: 60 }
+    const res = await fetch(apiUrl, {
+      cache: "no-store",
+      next: { revalidate: 0 },
     });
     
     if (!res.ok) {

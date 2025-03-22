@@ -4,6 +4,8 @@ import { put, del } from '@vercel/blob';
 
 // Update configuration to use nodejs runtime instead of edge
 export const runtime = "nodejs";
+// Add cache control to prevent stale data
+export const revalidate = 0;
 
 // Route to list all news
 export async function GET() {
@@ -17,7 +19,10 @@ export async function GET() {
     return NextResponse.json(news, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59'
+        // Add cache control headers to prevent browser caching
+        'Cache-Control': 'no-store, max-age=0, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       }
     });
   } catch (error) {
