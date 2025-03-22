@@ -2,7 +2,7 @@
 
 CodeWire is a modern blog platform focused on technology, programming, and innovation. Built with Next.js, TypeScript, and Tailwind CSS, it provides a responsive and user-friendly experience for both readers and content creators.
 
-![CodeWire Screenshot](https://placehold.co/800x400/png?text=CodeWire+Blog+App)
+![code wire wallapaer](https://github.com/user-attachments/assets/5bcdb8fa-7e77-4bbd-a14c-1e103b470886)
 
 ## Features
 
