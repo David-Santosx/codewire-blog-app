@@ -79,14 +79,17 @@ export default function EditNewsForm({ news }: { news: any }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({id: news.id, data: JSON.stringify(values)}),
+        body: JSON.stringify({
+          id: news.id,
+          ...values
+        }),
       });
-
+  
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error || "Erro ao atualizar notícia");
       }
-
+  
       toast.success("Notícia atualizada com sucesso!");
       router.push("/dashboard/news");
       router.refresh();
