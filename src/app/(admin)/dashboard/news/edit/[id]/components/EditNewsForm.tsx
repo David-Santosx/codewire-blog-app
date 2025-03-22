@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,18 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Editor } from "@/app/(admin panel)/dashboard/(pages)/news/add/components/editor";
+import dynamic from "next/dynamic";
+
+// Dynamically import the Editor component with SSR disabled
+const Editor = dynamic(
+  () => import("@/app/(admin panel)/dashboard/(pages)/news/add/components/editor").then(mod => mod.Editor),
+  { 
+    ssr: false,
+    loading: () => <div className="border rounded-md p-4 h-[300px] flex items-center justify-center bg-muted/20">
+      <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+    </div>
+  }
+);
 
 // Esquema de validação
 const formSchema = z.object({
@@ -55,6 +66,12 @@ type FormValues = z.infer<typeof formSchema>;
 export default function EditNewsForm({ news }: { news: any }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensure component is mounted before rendering editor
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Inicializar o formulário com os dados da notícia
   const form = useForm<FormValues>({

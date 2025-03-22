@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Loader2, ArrowLeft } from "lucide-react";
