@@ -16,13 +16,9 @@ export const dynamic = 'force-dynamic';
 
 async function getNews() {
   try {
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-    
-    const apiUrl = `${baseUrl}/api/news`;
-    
-    console.log("Fetching from URL:", apiUrl); // Debug log
+    const apiUrl = `/api/news`;
+
+    console.log("Fetching from URL:", apiUrl);
     
     const res = await fetch(apiUrl, {
       cache: "no-store",
