@@ -16,8 +16,13 @@ export const dynamic = 'force-dynamic';
 
 async function getNews() {
   try {
-    const apiUrl = `/api/news`;
-
+    const baseUrl = process.env.NEXT_PUBLIC_HOST || 
+                   (process.env.NODE_ENV === 'development' 
+                     ? 'http://localhost:3000' 
+                     : '');
+    
+    const apiUrl = `${baseUrl}/api/news`;
+    
     console.log("Fetching from URL:", apiUrl);
     
     const res = await fetch(apiUrl, {
