@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAdsense from "@/components/google-adsense";
 
 export const metadata: Metadata = {
   title: "CodeWire - Notícias de Tecnologia & Informação",
@@ -107,6 +108,7 @@ export default function RootLayout({
             >
               {children}
               <Analytics />
+              <GoogleAdsense />
               <SpeedInsights />
             </ThemeProvider>
           </body>

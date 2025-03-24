@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Base URL
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://code-wire-blog.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://codewireapp.com/";
   
   // Get all news
   const news = await prisma.news.findMany({

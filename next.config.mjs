@@ -8,7 +8,7 @@ const nextConfig = {
     ],
   },
   env: {
-    API_URL: "https://code-wire-blog.vercel.app",
+    API_URL: "https://codewireapp.com/",
   },
 };
 

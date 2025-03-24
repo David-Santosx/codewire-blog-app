@@ -169,6 +169,31 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
   const wordCount = contentText.replace(/<[^>]*>/g, "").split(/\s+/).length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
+  // Process content to insert ad after a random paragraph
+  const processContentWithAd = () => {
+    if (!news.content?.html) return { beforeAd: "", afterAd: "" };
+    
+    // Split content by paragraph tags
+    const paragraphs = news.content.html.split(/<\/p>/i);
+    
+    // Choose a random position after the first paragraph and before the last
+    // Ensure we have at least 3 paragraphs to make this meaningful
+    if (paragraphs.length < 3) return { beforeAd: news.content.html, afterAd: "" };
+    
+    // Select a position between 1 and paragraphs.length-2 (to avoid first and last paragraph)
+    const adPosition = Math.floor(Math.random() * (paragraphs.length - 2)) + 1;
+    
+    // Join paragraphs before ad
+    const beforeAd = paragraphs.slice(0, adPosition + 1).join("</p>") + "</p>";
+    
+    // Join paragraphs after ad
+    const afterAd = paragraphs.slice(adPosition + 1).join("</p>");
+    
+    return { beforeAd, afterAd };
+  };
+
+  const { beforeAd, afterAd } = processContentWithAd();
+
   return (
     <article className="max-w-screen-xl mx-auto">
       {/* Back button */}
@@ -266,10 +291,31 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
           {/* Main content */}
           <div className="lg:col-span-3">
             <div id="article-content" className="max-w-3xl">
-              <ArticleContent
-                html={news.content?.html || ""}
-                className="mb-8"
-              />
+              {/* First part of content */}
+              {beforeAd && (
+                <ArticleContent
+                  html={beforeAd}
+                  className="mb-4"
+                />
+              )}
+              
+              {/* Google Ads Container */}
+              <div className="my-8 text-center">
+                <div 
+                  id="article-ad-container"
+                  className="min-h-[250px] bg-muted/30 flex items-center justify-center rounded-md overflow-hidden"
+                >
+                  <div className="text-sm text-muted-foreground">Anúncio</div>
+                </div>
+              </div>
+              
+              {/* Second part of content */}
+              {afterAd && (
+                <ArticleContent
+                  html={afterAd}
+                  className="mt-4"
+                />
+              )}
 
               {/* Source */}
               <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://code-wire-blog.vercel.app/sitemap.xml
+Sitemap: https://codewireapp.com/sitemap.xml
 
 # Disallow admin panel
 Disallow: /dashboard/
