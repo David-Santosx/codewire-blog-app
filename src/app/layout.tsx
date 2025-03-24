@@ -2,8 +2,6 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
 import GoogleAdsense from "@/components/google-adsense";
 
 export const metadata: Metadata = {
@@ -107,9 +105,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
-              <Analytics />
               <GoogleAdsense />
-              <SpeedInsights />
             </ThemeProvider>
           </body>
         </html>
