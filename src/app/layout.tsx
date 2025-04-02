@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import Script from "next/script"; // Add this import
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   creator: "David Willians",
   publisher: "CodeWire",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://code-wire-blog.vercel.app"
+    process.env.NEXT_PUBLIC_APP_URL || "https://codewireapp.com"
   ),
   alternates: {
     canonical: "/",
@@ -104,11 +105,11 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
-              <script
+              <Script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1306875437034957"
                 crossOrigin="anonymous"
-              ></script>
+              />
               <ins
                 className="adsbygoogle"
                 style={{ display: "block" }}
@@ -117,9 +118,9 @@ export default function RootLayout({
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
+              <Script id="adsense-init" strategy="afterInteractive">
+                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+              </Script>
             </ThemeProvider>
           </body>
         </html>

@@ -24,20 +24,23 @@ export default function CustomAd() {
     invokeScript.type = "text/javascript";
     invokeScript.src = "//www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
     
+    // Store a reference to the current value
+    const currentRef = adContainerRef.current;
+    
     // Append scripts to the container
-    if (adContainerRef.current) {
-      adContainerRef.current.appendChild(optionsScript);
-      adContainerRef.current.appendChild(invokeScript);
+    if (currentRef) {
+      currentRef.appendChild(optionsScript);
+      currentRef.appendChild(invokeScript);
     }
     
-    // Cleanup function
+    // Cleanup function using the stored reference
     return () => {
-      if (adContainerRef.current) {
-        if (optionsScript.parentNode === adContainerRef.current) {
-          adContainerRef.current.removeChild(optionsScript);
+      if (currentRef) {
+        if (optionsScript.parentNode === currentRef) {
+          currentRef.removeChild(optionsScript);
         }
-        if (invokeScript.parentNode === adContainerRef.current) {
-          adContainerRef.current.removeChild(invokeScript);
+        if (invokeScript.parentNode === currentRef) {
+          currentRef.removeChild(invokeScript);
         }
       }
     };

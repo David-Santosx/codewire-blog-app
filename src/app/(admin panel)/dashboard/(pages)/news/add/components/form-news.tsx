@@ -184,7 +184,7 @@ export function NewsAddForm() {
     if (category) {
       setCategoryValue(category.value);
     }
-  }, []);
+  }, [form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {

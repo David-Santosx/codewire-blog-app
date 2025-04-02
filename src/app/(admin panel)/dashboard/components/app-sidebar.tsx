@@ -54,8 +54,8 @@ export function AppSidebar() {
   const { signOut } = useClerk();
   const pathname = usePathname();
 
+  const { user, isLoaded } = useUser();
   function getUser() {
-    const { user, isLoaded } = useUser();
 
     if (!isLoaded) {
       return <Skeleton className="w-[200px] h-[30px]" />;
