@@ -13,6 +13,7 @@ import AppFooter from "@/app/components/footer";
 import { ArticleContent } from "@/components/ui/article-content";
 import { ArticleTOC } from "@/components/ui/article-toc";
 import { MobileTOC } from "@/components/ui/mobile-toc";
+import Script from "next/script";
 
 function NewsLoading() {
   return (
@@ -299,13 +300,29 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
                 />
               )}
               
-              {/* Google Ads Container */}
+              {/* Custom Ad Container */}
               <div className="my-8 text-center">
                 <div 
                   id="article-ad-container"
-                  className="min-h-[250px] bg-muted/30 flex items-center justify-center rounded-md overflow-hidden"
+                  className="min-h-[300px] flex items-center justify-center rounded-md overflow-hidden"
                 >
-                  <div className="text-sm text-muted-foreground">Anúncio</div>
+                  <div id="ad-container-inner">
+                    <Script id="ad-options" strategy="afterInteractive">
+                      {`
+                        atOptions = {
+                          'key' : 'fb9aa2ad7d840d3a64a270f425d05469',
+                          'format' : 'iframe',
+                          'height' : 300,
+                          'width' : 160,
+                          'params' : {}
+                        };
+                      `}
+                    </Script>
+                    <Script 
+                      src="//www.highperformanceformat.com/fb9aa2ad7d840d3a64a270f425d05469/invoke.js"
+                      strategy="afterInteractive"
+                    />
+                  </div>
                 </div>
               </div>
               
