@@ -2,7 +2,6 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import GoogleAdsense from "@/components/google-adsense";
 
 export const metadata: Metadata = {
   title: "CodeWire - Notícias de Tecnologia & Informação",
@@ -105,7 +104,6 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
-              <GoogleAdsense />
               <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1306875437034957"
