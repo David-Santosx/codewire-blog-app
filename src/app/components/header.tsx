@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import CodeWire from "@/../public/CodeWire.svg";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import CustomAd from "@/components/custom-ad";
 
 interface WeatherInfos {
   currentWeather: number;
@@ -176,20 +177,10 @@ export default function AppHeader() {
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : (
-            <Link href={adLinkUrl} target="_blank" rel="noopener noreferrer">
-              <Image
-                src={adImageUrl}
-                alt="Anúncio"
-                width={728}
-                height={90}
-                className="w-full md:w-[728px] h-auto md:h-[90px] object-contain mx-auto"
-                priority
-              />
-            </Link>
+            <CustomAd />
           )}
         </div>
       </div>
-
       {/* Navigation Menu */}
       <div className="w-full border-b bg-background">
         <div className="container mx-auto lg:px-[80px] md:px-10 sm:px-6 px-4 py-3 flex flex-col md:flex-row items-center justify-between">
