@@ -98,6 +98,9 @@ export default function RootLayout({
           suppressHydrationWarning
           suppressContentEditableWarning
         >
+          <head>
+            <meta name="monetag" content="41bd86e223dc562faeabaa47957ecca6" />
+          </head>
           <body>
             <ThemeProvider
               attribute="class"
