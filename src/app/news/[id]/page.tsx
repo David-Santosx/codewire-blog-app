@@ -293,46 +293,13 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
           <div className="lg:col-span-3">
             <div id="article-content" className="max-w-3xl">
               {/* First part of content */}
-              {beforeAd && (
-                <ArticleContent
-                  html={beforeAd}
-                  className="mb-4"
-                />
-              )}
-              
+              {beforeAd && <ArticleContent html={beforeAd} className="mb-4" />}
+
               {/* Custom Ad Container */}
-              <div className="my-8 text-center">
-                <div 
-                  id="article-ad-container"
-                  className="min-h-[300px] flex items-center justify-center rounded-md overflow-hidden"
-                >
-                  <div id="ad-container-inner">
-                    <Script id="ad-options" strategy="afterInteractive">
-                      {`
-                        atOptions = {
-                          'key' : 'fb9aa2ad7d840d3a64a270f425d05469',
-                          'format' : 'iframe',
-                          'height' : 300,
-                          'width' : 160,
-                          'params' : {}
-                        };
-                      `}
-                    </Script>
-                    <Script 
-                      src="//www.highperformanceformat.com/fb9aa2ad7d840d3a64a270f425d05469/invoke.js"
-                      strategy="afterInteractive"
-                    />
-                  </div>
-                </div>
-              </div>
-              
+              <div className="my-8 text-center"></div>
+
               {/* Second part of content */}
-              {afterAd && (
-                <ArticleContent
-                  html={afterAd}
-                  className="mt-4"
-                />
-              )}
+              {afterAd && <ArticleContent html={afterAd} className="mt-4" />}
 
               {/* Source */}
               <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
