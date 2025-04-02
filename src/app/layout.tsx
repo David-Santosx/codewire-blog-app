@@ -45,6 +45,9 @@ export const metadata: Metadata = {
       "Notícias, artigos e tutoriais sobre tecnologia, programação e inovação para desenvolvedores e entusiastas de tecnologia.",
     images: ["/og-image.jpg"],
   },
+  other: {
+    monetag: "41bd86e223dc562faeabaa47957ecca6",
+  },
   icons: {
     icon: [
       { url: "/favicon_io/favicon.ico" },
