@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import Script from "next/script"; // Add this import
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -105,22 +104,6 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
-              <Script
-                async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1306875437034957"
-                crossOrigin="anonymous"
-              />
-              <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-1306875437034957"
-                data-ad-slot="5557634349"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-              <Script id="adsense-init" strategy="afterInteractive">
-                {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-              </Script>
             </ThemeProvider>
           </body>
         </html>
