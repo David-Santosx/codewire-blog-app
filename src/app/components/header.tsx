@@ -13,7 +13,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CodeWire from "@/../public/CodeWire.svg";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -37,6 +37,7 @@ export default function AppHeader() {
   });
 
   const [loadingState, setLoadingState] = useState<LoadingState>("idle");
+  const headerAdRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -62,9 +63,45 @@ export default function AppHeader() {
     }
   }, []);
 
-  // Rest of the component remains the same, but without ad-related code
-  return (
+  useEffect(() => {
+    // Store the current value of the ref in a variable
+    const currentRef = headerAdRef.current;
+    if (!currentRef) return;
 
+    // Create the first script element (atOptions)
+    const atOptionsScript = document.createElement('script');
+    atOptionsScript.type = 'text/javascript';
+    atOptionsScript.text = `
+      atOptions = {
+        'key' : '04647b89bd575eee7e54afa2eb08c4e8',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    `;
+    currentRef.appendChild(atOptionsScript);
+
+    // Create the second script element (invoke.js)
+    const invokeScript = document.createElement('script');
+    invokeScript.type = 'text/javascript';
+    invokeScript.src = '//www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js';
+    invokeScript.async = true;
+    currentRef.appendChild(invokeScript);
+
+    // Cleanup function
+    return () => {
+      // Use the captured ref value instead of headerAdRef.current
+      if (atOptionsScript.parentNode) {
+        atOptionsScript.parentNode.removeChild(atOptionsScript);
+      }
+      if (invokeScript.parentNode) {
+        invokeScript.parentNode.removeChild(invokeScript);
+      }
+    };
+  }, []);
+
+  return (
     <header>
       <div className="w-full h-auto min-h-[40px] py-2 text-black flex flex-col sm:flex-row items-center justify-between bg-brand-primary lg:px-[80px] md:px-10 sm:px-6 px-4">
         <div className="flex items-center gap-1 mb-2 sm:mb-0">
@@ -133,9 +170,9 @@ export default function AppHeader() {
           />
         </Link>
         <div className="w-full md:w-auto overflow-hidden">
-            <div className="w-full md:w-[728px] h-[90px] bg-muted/20 rounded-md animate-pulse flex items-center justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-            </div>
+          <div className="w-full md:w-[728px] h-[90px] flex items-center justify-center">
+            <div ref={headerAdRef} className="w-full h-full"></div>
+          </div>
         </div>
       </div>
       {/* Navigation Menu */}
