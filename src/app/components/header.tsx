@@ -86,7 +86,7 @@ export default function AppHeader() {
       const invokeScript = document.createElement("script");
       invokeScript.type = "text/javascript";
       invokeScript.src =
-        "https://www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
+        "//www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
       invokeScript.async = true;
       invokeScript.crossOrigin = "anonymous"; // Add crossOrigin attribute
       
