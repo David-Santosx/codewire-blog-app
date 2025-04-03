@@ -22,7 +22,7 @@ export default function CustomAd() {
     // Create the second script element (invoke.js)
     const invokeScript = document.createElement("script");
     invokeScript.type = "text/javascript";
-    invokeScript.src = "//www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
+    invokeScript.src = "https://www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
     
     // Store a reference to the current value
     const currentRef = adContainerRef.current;
