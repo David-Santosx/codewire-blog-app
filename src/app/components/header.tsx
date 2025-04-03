@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import CodeWire from "@/../public/CodeWire.svg";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -68,35 +67,49 @@ export default function AppHeader() {
     const currentRef = headerAdRef.current;
     if (!currentRef) return;
 
-    // Create the first script element (atOptions)
-    const atOptionsScript = document.createElement('script');
-    atOptionsScript.type = 'text/javascript';
-    atOptionsScript.text = `
-      atOptions = {
-        'key' : '04647b89bd575eee7e54afa2eb08c4e8',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
-    `;
-    currentRef.appendChild(atOptionsScript);
+    try {
+      // Create the first script element (atOptions)
+      const atOptionsScript = document.createElement("script");
+      atOptionsScript.type = "text/javascript";
+      atOptionsScript.text = `
+        atOptions = {
+          'key' : '04647b89bd575eee7e54afa2eb08c4e8',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      `;
+      currentRef.appendChild(atOptionsScript);
 
-    // Create the second script element (invoke.js)
-    const invokeScript = document.createElement('script');
-    invokeScript.type = 'text/javascript';
-    invokeScript.src = '//www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js';
-    invokeScript.async = true;
-    currentRef.appendChild(invokeScript);
+      // Create the second script element (invoke.js)
+      const invokeScript = document.createElement("script");
+      invokeScript.type = "text/javascript";
+      invokeScript.src =
+        "https://www.highperformanceformat.com/04647b89bd575eee7e54afa2eb08c4e8/invoke.js";
+      invokeScript.async = true;
+      invokeScript.crossOrigin = "anonymous"; // Add crossOrigin attribute
+      
+      // Add error handling for the script
+      invokeScript.onerror = (error) => {
+        console.error("Error loading ad script:", error);
+        // Optionally add a fallback ad or message
+      };
+      
+      currentRef.appendChild(invokeScript);
+    } catch (error) {
+      console.error("Error setting up ad scripts:", error);
+    }
 
     // Cleanup function
     return () => {
-      // Use the captured ref value instead of headerAdRef.current
-      if (atOptionsScript.parentNode) {
-        atOptionsScript.parentNode.removeChild(atOptionsScript);
-      }
-      if (invokeScript.parentNode) {
-        invokeScript.parentNode.removeChild(invokeScript);
+      try {
+        // Use the captured ref value instead of headerAdRef.current
+        while (currentRef.firstChild) {
+          currentRef.removeChild(currentRef.firstChild);
+        }
+      } catch (error) {
+        console.error("Error cleaning up ad scripts:", error);
       }
     };
   }, []);
@@ -162,7 +175,7 @@ export default function AppHeader() {
       <div className="p-4 lg:px-[80px] md:px-10 sm:px-6 px-4 border-b-2 flex flex-col md:flex-row items-center justify-between gap-4">
         <Link href={"/"} className="mb-3 md:mb-0">
           <Image
-            src={CodeWire}
+            src={"/CodeWire.svg"}
             alt="CodeWire"
             width={200}
             height={100}
@@ -179,14 +192,18 @@ export default function AppHeader() {
       <div className="w-full border-b bg-background">
         <div className="container mx-auto lg:px-[80px] md:px-10 sm:px-6 px-4 py-3 flex flex-col md:flex-row items-center justify-between">
           <div className="text-sm md:text-base italic text-muted-foreground font-medium mb-3 md:mb-0">
-            &quot;Transformando linhas de código em soluções que mudam o mundo&quot;
+            &quot;Transformando linhas de código em soluções que mudam o
+            mundo&quot;
           </div>
           <nav>
             <ul className="flex space-x-4 font-medium">
               <li>
-                <Link href="/cursos" className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
-                    <BookOpen className="mr-1 h-4 w-4" />
-                    Cursos
+                <Link
+                  href="/cursos"
+                  className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"
+                >
+                  <BookOpen className="mr-1 h-4 w-4" />
+                  Cursos
                 </Link>
               </li>
               <li>
@@ -210,5 +227,5 @@ export default function AppHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
