@@ -1,5 +1,5 @@
 "use client";
-import { ChartArea, FilePlus2, LogOut, Newspaper, ImageIcon } from "lucide-react";
+import { ChartArea, FilePlus2, LogOut, Newspaper } from "lucide-react";
 
 import {
   Sidebar,
@@ -43,11 +43,7 @@ const items = [
     url: "/dashboard/news",
     icon: Newspaper,
   },
-  {
-    title: "Gerenciar Anúncios",
-    url: "/dashboard/ads",
-    icon: ImageIcon,
-  },
+  // Removed the Ads management item
 ];
 
 export function AppSidebar() {

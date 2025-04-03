@@ -17,19 +17,10 @@ import { useEffect, useState } from "react";
 import CodeWire from "@/../public/CodeWire.svg";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
-import CustomAd from "@/components/custom-ad";
 
 interface WeatherInfos {
   currentWeather: number;
   currentLocation: string;
-}
-
-interface AdSettings {
-  headerAd: {
-    imageUrl: string;
-    linkUrl: string;
-    isActive: boolean;
-  };
 }
 
 type LoadingState = "idle" | "loading" | "loaded" | "error";
@@ -46,26 +37,6 @@ export default function AppHeader() {
   });
 
   const [loadingState, setLoadingState] = useState<LoadingState>("idle");
-  const [adSettings, setAdSettings] = useState<AdSettings | null>(null);
-  const [adLoading, setAdLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchAdSettings() {
-      try {
-        const response = await fetch("/api/ads");
-        if (response.ok) {
-          const data = await response.json();
-          setAdSettings(data);
-        }
-      } catch (error) {
-        console.error("Erro ao carregar configurações de anúncios:", error);
-      } finally {
-        setAdLoading(false);
-      }
-    }
-
-    fetchAdSettings();
-  }, []);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -84,26 +55,16 @@ export default function AppHeader() {
           }
         },
         (error) => {
-          console.error("Geolocation error:", error);
+          console.error("Error getting location:", error);
           setLoadingState("error");
         }
       );
-    } else {
-      setLoadingState("error");
     }
   }, []);
 
-  const adImageUrl =
-    !adLoading && adSettings?.headerAd?.isActive && adSettings.headerAd.imageUrl
-      ? adSettings.headerAd.imageUrl
-      : "https://placehold.co/728x90/png";
-
-  const adLinkUrl =
-    !adLoading && adSettings?.headerAd?.linkUrl
-      ? adSettings.headerAd.linkUrl
-      : "#";
-
+  // Rest of the component remains the same, but without ad-related code
   return (
+
     <header>
       <div className="w-full h-auto min-h-[40px] py-2 text-black flex flex-col sm:flex-row items-center justify-between bg-brand-primary lg:px-[80px] md:px-10 sm:px-6 px-4">
         <div className="flex items-center gap-1 mb-2 sm:mb-0">
@@ -172,13 +133,9 @@ export default function AppHeader() {
           />
         </Link>
         <div className="w-full md:w-auto overflow-hidden">
-          {adLoading ? (
             <div className="w-full md:w-[728px] h-[90px] bg-muted/20 rounded-md animate-pulse flex items-center justify-center">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
-          ) : (
-            <CustomAd />
-          )}
         </div>
       </div>
       {/* Navigation Menu */}
@@ -216,5 +173,5 @@ export default function AppHeader() {
         </div>
       </div>
     </header>
-  );
+  )
 }
