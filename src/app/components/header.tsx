@@ -142,7 +142,7 @@ export default function AppHeader() {
       <div className="w-full border-b bg-background">
         <div className="container mx-auto lg:px-[80px] md:px-10 sm:px-6 px-4 py-3 flex flex-col md:flex-row items-center justify-between">
           <div className="text-sm md:text-base italic text-muted-foreground font-medium mb-3 md:mb-0">
-            "Transformando linhas de código em soluções que mudam o mundo"
+            &quot;Transformando linhas de código em soluções que mudam o mundo&quot;
           </div>
           <nav>
             <ul className="flex space-x-4 font-medium">

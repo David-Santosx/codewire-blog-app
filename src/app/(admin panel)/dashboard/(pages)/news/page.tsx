@@ -109,7 +109,7 @@ export default function NewsPage() {
       {news.length === 0 ? (
         <div className="text-center p-8 border rounded-md">
           <p className="text-lg text-gray-500">Nenhuma notícia encontrada</p>
-          <p className="text-sm text-gray-400 mt-2">Clique em "Adicionar Notícia" para criar conteúdo</p>
+          <p className="text-sm text-gray-400 mt-2">Clique em &quot;Adicionar Notícia&quot; para criar conteúdo</p>
         </div>
       ) : (
         <DataTable 
