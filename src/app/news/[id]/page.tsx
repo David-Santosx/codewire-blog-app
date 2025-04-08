@@ -13,6 +13,7 @@ import AppFooter from "@/app/components/footer";
 import { ArticleContent } from "@/components/ui/article-content";
 import { ArticleTOC } from "@/components/ui/article-toc";
 import { MobileTOC } from "@/components/ui/mobile-toc";
+import { LikeButton } from "@/components/like-button";
 
 function NewsLoading() {
   return (
@@ -272,9 +273,14 @@ function NewsArticle({ news, relatedNews, nextArticle }: {
                 className="mb-4"
               />
               
-              {/* Source */}
+              {/* Source and engagement */}
               <div className="text-sm text-muted-foreground mt-8 pt-4 border-t border-border">
-                <span className="font-medium">Fonte:</span> {news.source}
+                <div className="flex justify-between items-center">
+                  <span>
+                    <span className="font-medium">Fonte:</span> {news.source}
+                  </span>
+                  <LikeButton newsId={news.id} initialLikes={news.likes || 0} />
+                </div>
               </div>
             </div>
           </div>
